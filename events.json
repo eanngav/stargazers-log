@@ -1,0 +1,23 @@
+[
+  {
+    "name": "octocat/hello-world",
+    "description": "A friendly starter project for learning GitHub workflows.",
+    "language": "HTML",
+    "stars": 128,
+    "starredAt": "2026-07-20"
+  },
+  {
+    "name": "microsoft/vscode",
+    "description": "Visual Studio Code, a powerful editor for building modern apps.",
+    "language": "TypeScript",
+    "stars": 154000,
+    "starredAt": "2026-07-18"
+  },
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "description": "A community-driven education platform with free coding lessons.",
+    "language": "JavaScript",
+    "stars": 410000,
+    "starredAt": "2026-07-15"
+  }
+]
