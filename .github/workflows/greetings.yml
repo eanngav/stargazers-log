@@ -1,16 +1,49 @@
+# Name of the workflow shown in the GitHub Actions tab
 name: Greetings
 
-on: [pull_request_target, issues]
+# Events that trigger this workflow
+on:
+  # Runs when a pull request is opened, reopened, or updated
+  pull_request_target:
 
+  # Runs when an issue is opened
+  issues:
+
+# Jobs to be executed
 jobs:
+
+  # Job name
   greeting:
+
+    # Use the latest Ubuntu virtual machine provided by GitHub
     runs-on: ubuntu-latest
+
+    # Permissions required by this workflow
     permissions:
+
+      # Allows the workflow to post comments on issues
       issues: write
+
+      # Allows the workflow to post comments on pull requests
       pull-requests: write
+
+    # Steps to execute
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Message that will be displayed on users' first issue"
-        pr-message: "Message that will be displayed on users' first pull request"
+
+      # Use GitHub's First Interaction Action
+      # This action detects a user's first issue or first pull request
+      # and posts a welcome message.
+      - uses: actions/first-interaction@v1
+
+        # Inputs required by the action
+        with:
+
+          # Automatically generated GitHub token used to authenticate
+          # and post comments on behalf of the workflow
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Welcome message posted the first time someone creates an issue
+          issue-message: "Message that will be displayed on users' first issue"
+
+          # Welcome message posted the first time someone creates a pull request
+          pr-message: "Message that will be displayed on users' first pull request"
