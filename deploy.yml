@@ -2,12 +2,14 @@
 name: Deploy to GitHub Pages
 
 # Trigger the workflow whenever code is pushed to the main branch
+# on tells GitHub Actions to run the workflow on every push to main.
 on:
   push:
     branches:
       - main
 
 # Permissions required for the workflow
+# permissions grant the workflow the access it needs to publish to GitHub Pages.
 permissions:
   # Allows the workflow to read the repository contents
   contents: read
@@ -26,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
 
     # Specify the deployment environment
+    # environment connects the job to your GitHub Pages site 
+    # and exposes the published URL as ${{ steps.deployment.outputs.page_url }}.
+    
     environment:
       # GitHub Pages environment
       name: github-pages
@@ -34,6 +39,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     # Steps executed in order
+    # steps check out your code, prepare GitHub Pages, 
+    # upload your files as an artifact, and deploy them to your live site.
+    
     steps:
 
       # Download the repository contents onto the runner
