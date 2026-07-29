@@ -1,3 +1,12 @@
+# What this workflow does
+# It waits for someone to open an Issue or open a Pull Request.
+# It checks whether this is the person's first interaction with your repository.
+# If it is their first Issue, it posts the issue-message.
+# If it is their first Pull Request, it posts the pr-message.
+# If the person has already opened an Issue or Pull Request before, the workflow does nothing.
+
+Note: This workflow does not have a Run workflow button because it only runs when one of the specified GitHub events (issues or pull_request_target) occurs. If you want to be able to run it manually from the Actions tab, you can add workflow_dispatch: under the on: section.
+
 # Name of the workflow shown in the GitHub Actions tab
 name: Greetings
 
