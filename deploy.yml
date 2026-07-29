@@ -1,0 +1,60 @@
+# Name of the GitHub Actions workflow displayed in the Actions tab
+name: Deploy to GitHub Pages
+
+# Trigger the workflow whenever code is pushed to the main branch
+on:
+  push:
+    branches:
+      - main
+
+# Permissions required for the workflow
+permissions:
+  # Allows the workflow to read the repository contents
+  contents: read
+
+  # Allows the workflow to deploy to GitHub Pages
+  pages: write
+
+  # Allows authentication using OpenID Connect (OIDC)
+  id-token: write
+
+# Define the jobs to run
+jobs:
+  # Deployment job
+  deploy:
+    # Use the latest Ubuntu virtual machine provided by GitHub
+    runs-on: ubuntu-latest
+
+    # Specify the deployment environment
+    environment:
+      # GitHub Pages environment
+      name: github-pages
+
+      # URL of the deployed website, obtained after deployment
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Steps executed in order
+    steps:
+
+      # Download the repository contents onto the runner
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # Configure GitHub Pages for deployment
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Upload the website files as an artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          # Upload everything in the repository root
+          path: '.'
+
+      # Deploy the uploaded artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        # Assign an ID so later steps can reference deployment outputs
+        id: deployment
+
+        # Official GitHub Action that publishes the site
+        uses: actions/deploy-pages@v4
